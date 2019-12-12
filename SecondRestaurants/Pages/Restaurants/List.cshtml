@@ -1,0 +1,41 @@
+﻿@page
+@model SecondRestaurants.ListModel
+@{
+    ViewData["Title"] = "List";
+}
+
+<h1>Restaurant List</h1>
+<table class="table">
+    @{ 
+        foreach (var restaurant in Model.Restaurants){
+            <tr>
+                
+                <td>@restaurant.Name</td>
+                <td>@restaurant.Location</td>
+                <td>@restaurant.Cusine</td>
+                <td>
+                    <a class="btn btn-lg"
+                       asp-page="Detail"
+                       asp-route-restaurantId="@restaurant.Id">
+                        <i class="fas fa-search"></i>
+                    </a> 
+                </td>
+                <td>
+                    <a class="btn btn-lg"
+                       asp-page="Edit"
+                       asp-route-restaurantId="@restaurant.Id">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                </td>
+                <td>
+                    <a class="btn btn-lg"
+                       asp-page="Delete"
+                       asp-route-restaurantId="@restaurant.Id">
+                        <i class="fas fa-delete"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    }
+</table>
+
