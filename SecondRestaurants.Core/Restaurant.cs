@@ -13,6 +13,6 @@ namespace SecondRestaurants.Core
         [Required, StringLength(150)]
         public string Location { get; set; }
 
-        public CusineType Cusine { get; set; }
+        public CuisineType Cuisine { get; set; }
     }
 }

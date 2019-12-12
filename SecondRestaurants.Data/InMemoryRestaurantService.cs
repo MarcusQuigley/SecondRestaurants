@@ -17,13 +17,13 @@ namespace SecondRestaurants.Data
 
             restaurantList = new List<Restaurant> {
                 new Restaurant {
-                    Id=0, Name="Marea", Location="Manhattan", Cusine=CusineType.Italian
+                    Id=0, Name="Marea", Location="Manhattan", Cuisine=CuisineType.Italian
                 },
                   new Restaurant {
-                    Id=1, Name="Kati", Location="Astoria", Cusine=CusineType.Thai
+                    Id=1, Name="Kati", Location="Astoria", Cuisine=CuisineType.Thai
                 },
                     new Restaurant {
-                    Id=2, Name="Acupulco", Location="Brooklyn", Cusine=CusineType.Mexican
+                    Id=2, Name="Acupulco", Location="Brooklyn", Cuisine=CuisineType.Mexican
                 }
 
             };
@@ -72,10 +72,10 @@ namespace SecondRestaurants.Data
             {
                 rest.Name = restaurant.Name;
                 rest.Location = restaurant.Location;
-                rest.Cusine = restaurant.Cusine;
+                rest.Cuisine = restaurant.Cuisine;
             }
 
-            return restaurant;
+            return rest;
         }
     }
 }

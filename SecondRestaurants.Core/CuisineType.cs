@@ -1,6 +1,6 @@
 ﻿namespace SecondRestaurants.Core
 {
-    public enum CusineType
+    public enum CuisineType
     {
         Undefined,
         Italian,
