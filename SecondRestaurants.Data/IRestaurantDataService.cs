@@ -14,6 +14,6 @@ namespace SecondRestaurants.Data
 
         Restaurant Update(Restaurant updatedRestaurant);
 
-        bool Delete(int restaurantId);
+        Restaurant Delete(int restaurantId);
     }
 }

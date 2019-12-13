@@ -40,15 +40,14 @@ namespace SecondRestaurants.Data
             return newRestaurant;
         }
 
-        public bool Delete(int restaurantId)
+        public Restaurant Delete(int restaurantId)
         {
             var restaurant = restaurantList.SingleOrDefault(r => r.Id == restaurantId);
             if (restaurant != null)
             {
                 restaurantList.Remove(restaurant);
-                return true;
-            }
-            return false;
+             }
+            return restaurant;
         }
 
         public IEnumerable<Restaurant> GetRestaurantsByName(string name = null)
