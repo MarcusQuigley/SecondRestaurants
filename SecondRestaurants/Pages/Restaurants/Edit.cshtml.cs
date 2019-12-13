@@ -27,24 +27,25 @@ namespace MyApp.Namespace
         }
 
         public IEnumerable<SelectListItem> Cuisines { get; set; }
-       
+        
+        [BindProperty]
         public string EditMessage { get; set; }
 
         [BindProperty]
         public Restaurant Restaurant { get; set; }
        
-        public IActionResult OnGet(int restaurantId)
+        public IActionResult OnGet(int? restaurantId)
         {
             Cuisines = htmlHelper.GetEnumSelectList<CuisineType>(); 
-            if (restaurantId == 0)
+            if (restaurantId.HasValue)
             {
-                Restaurant = new Restaurant();
-                EditMessage = "Add new restaurant";
+                Restaurant = service.GetById(restaurantId.Value);
+                EditMessage = $"Editing {Restaurant.Name}";
             }
             else
             {
-                Restaurant = service.GetById(restaurantId);
-                EditMessage = $"Editing {Restaurant.Name}";
+                Restaurant = new Restaurant();
+                EditMessage = "Add new restaurant";
             }
             if (Restaurant == null)
             {
