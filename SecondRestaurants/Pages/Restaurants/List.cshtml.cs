@@ -22,7 +22,7 @@ namespace SecondRestaurants
 
         public IActionResult OnGet()
         {
-            Restaurants = service.GetRestaurants();
+            Restaurants = service.GetRestaurantsByName(string.Empty);
 
             return Page();
         }

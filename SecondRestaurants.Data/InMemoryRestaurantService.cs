@@ -17,27 +17,27 @@ namespace SecondRestaurants.Data
 
             restaurantList = new List<Restaurant> {
                 new Restaurant {
-                    Id=0, Name="Marea", Location="Manhattan", Cuisine=CuisineType.Italian
+                    Id=1, Name="Marea", Location="Manhattan", Cuisine=CuisineType.Italian
                 },
                   new Restaurant {
-                    Id=1, Name="Kati", Location="Astoria", Cuisine=CuisineType.Thai
+                    Id=2, Name="Kati", Location="Astoria", Cuisine=CuisineType.Thai
                 },
                     new Restaurant {
-                    Id=2, Name="Acupulco", Location="Brooklyn", Cuisine=CuisineType.Mexican
+                    Id=3, Name="Acupulco", Location="Brooklyn", Cuisine=CuisineType.Mexican
                 }
 
             };
 
         }
-        public Restaurant Add(Restaurant restaurant)
+        public Restaurant Add(Restaurant newRestaurant)
         {
-           if (restaurant == null)
+           if (newRestaurant == null)
             {
-                throw new ArgumentNullException("restaurant");
+                throw new ArgumentNullException("newRestaurant");
             }
-            restaurant.Id = restaurantList.Count();
-            restaurantList.Add(restaurant);
-            return restaurant;
+            newRestaurant.Id = restaurantList.Max(r => r.Id) + 1;
+            restaurantList.Add(newRestaurant);
+            return newRestaurant;
         }
 
         public bool Delete(int restaurantId)
@@ -51,9 +51,10 @@ namespace SecondRestaurants.Data
             return false;
         }
 
-        public IEnumerable<Restaurant> GetRestaurants()
+        public IEnumerable<Restaurant> GetRestaurantsByName(string name = null)
         {
-            return restaurantList;
+            return restaurantList.Where(r=>r.Name.StartsWith(name) || string.IsNullOrEmpty(name))
+                                 .OrderBy(r=>r.Name);
         }
 
         public Restaurant GetById(int restaurantId)
@@ -61,21 +62,21 @@ namespace SecondRestaurants.Data
             return restaurantList.SingleOrDefault(r => r.Id == restaurantId);
         }
 
-        public Restaurant Update(Restaurant restaurant)
+        public Restaurant Update(Restaurant updatedRestaurant)
         {
-            if (restaurant == null)
+            if (updatedRestaurant == null)
             {
                 throw new ArgumentNullException("restaurant");
             }
-            var rest = restaurantList.SingleOrDefault(r => r.Id == restaurant.Id);
-            if (rest != null)
+            var restaurant = restaurantList.SingleOrDefault(r => r.Id == updatedRestaurant.Id);
+            if (restaurant != null)
             {
-                rest.Name = restaurant.Name;
-                rest.Location = restaurant.Location;
-                rest.Cuisine = restaurant.Cuisine;
+                restaurant.Name = updatedRestaurant.Name;
+                restaurant.Location = updatedRestaurant.Location;
+                restaurant.Cuisine = updatedRestaurant.Cuisine;
             }
 
-            return rest;
+            return restaurant;
         }
     }
 }

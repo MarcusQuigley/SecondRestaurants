@@ -3,8 +3,9 @@
 @{
     ViewData["Title"] = "Edit";
 }
-<h2>Editing @Model.Restaurant.Name</h2>
+<h2>@Model.EditMessage</h2>
     <form method="post">
+        <input type="hidden" asp-for="Restaurant.Id"/>
         <div class="form-group">
             <label asp-for="Restaurant.Name"/>
             <input asp-for="Restaurant.Name"

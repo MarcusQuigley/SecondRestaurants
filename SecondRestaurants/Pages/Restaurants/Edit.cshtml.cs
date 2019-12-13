@@ -27,12 +27,25 @@ namespace MyApp.Namespace
         }
 
         public IEnumerable<SelectListItem> Cuisines { get; set; }
+       
+        public string EditMessage { get; set; }
+
         [BindProperty]
         public Restaurant Restaurant { get; set; }
+       
         public IActionResult OnGet(int restaurantId)
         {
-            Cuisines = htmlHelper.GetEnumSelectList<CuisineType>();// as IEnumerable<CuisineType>;
-            Restaurant = service.GetById(restaurantId);
+            Cuisines = htmlHelper.GetEnumSelectList<CuisineType>(); 
+            if (restaurantId == 0)
+            {
+                Restaurant = new Restaurant();
+                EditMessage = "Add new restaurant";
+            }
+            else
+            {
+                Restaurant = service.GetById(restaurantId);
+                EditMessage = $"Editing {Restaurant.Name}";
+            }
             if (Restaurant == null)
             {
                 return RedirectToPage("NotFound");
@@ -42,16 +55,28 @@ namespace MyApp.Namespace
 
         public IActionResult OnPost()
         {
+            if (!ModelState.IsValid)
+            {
+                Cuisines = htmlHelper.GetEnumSelectList<CuisineType>();
+                return Page();
+            }
             try
             {
-                Restaurant = service.Update(Restaurant);
-                return RedirectToPage("Detail");
+                if (Restaurant.Id == 0)
+                {
+                    Restaurant = service.Add(Restaurant);
+                }
+                else
+                {
+                    Restaurant = service.Update(Restaurant);
+                }
+                return RedirectToPage("Detail",new { restaurantId=Restaurant.Id});
             }
             catch (Exception ex)
             {
                 logger.LogError(0, ex, ex.Message);
+                Cuisines = htmlHelper.GetEnumSelectList<CuisineType>();
                 return Page();
-                 
             }
         }
     }

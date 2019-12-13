@@ -21,7 +21,7 @@ namespace SecondRestaurants
         public void ConfigureServices(IServiceCollection services)
         {
              
-            services.AddScoped<IRestaurantDataService, InMemoryRestaurantService>();
+            services.AddSingleton<IRestaurantDataService, InMemoryRestaurantService>();
             services.AddMvc().AddRazorRuntimeCompilation();
             services.AddRazorPages();
         }

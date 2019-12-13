@@ -8,11 +8,11 @@ namespace SecondRestaurants.Data
     {
         Restaurant GetById(int restaurantId);
 
-        IEnumerable<Restaurant> GetRestaurants();
+        IEnumerable<Restaurant> GetRestaurantsByName(string name);
 
-        Restaurant Add(Restaurant restaurant);
+        Restaurant Add(Restaurant newRestaurant);
 
-        Restaurant Update(Restaurant restaurant);
+        Restaurant Update(Restaurant updatedRestaurant);
 
         bool Delete(int restaurantId);
     }
