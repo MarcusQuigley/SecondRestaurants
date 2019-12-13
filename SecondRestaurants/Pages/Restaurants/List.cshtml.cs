@@ -17,14 +17,22 @@ namespace SecondRestaurants
         {
             this.service = service;
         }
+        [BindProperty]
+        public String SearchTerm { get; set; }
 
         public IEnumerable<Restaurant> Restaurants { get; set; }
 
         public IActionResult OnGet()
         {
-            Restaurants = service.GetRestaurantsByName(string.Empty);
+            Restaurants = service.GetRestaurantsByName(SearchTerm);
 
             return Page();
+        }
+
+        public void OnPost()
+        {
+            Restaurants = service.GetRestaurantsByName(SearchTerm);
+     
         }
     }
 }

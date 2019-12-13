@@ -53,7 +53,7 @@ namespace SecondRestaurants.Data
 
         public IEnumerable<Restaurant> GetRestaurantsByName(string name = null)
         {
-            return restaurantList.Where(r=>r.Name.StartsWith(name) || string.IsNullOrEmpty(name))
+            return restaurantList.Where(r=> string.IsNullOrEmpty(name) || r.Name.StartsWith(name, StringComparison.OrdinalIgnoreCase) )
                                  .OrderBy(r=>r.Name);
         }
 
