@@ -32,6 +32,7 @@ namespace SecondRestaurants
         public IActionResult OnPost(int restaurantId)//Restaurant restaurant)
         {
             Restaurant = service.Delete(restaurantId);
+            service.Commit();
             if (Restaurant == null)
                 return RedirectToPage("./NotFound");
             return RedirectToPage("./List");

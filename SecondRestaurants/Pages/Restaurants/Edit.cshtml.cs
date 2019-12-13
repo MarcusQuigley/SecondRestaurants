@@ -71,6 +71,7 @@ namespace MyApp.Namespace
                 {
                     Restaurant = service.Update(Restaurant);
                 }
+                service.Commit();
                 return RedirectToPage("Detail",new { restaurantId=Restaurant.Id});
             }
             catch (Exception ex)

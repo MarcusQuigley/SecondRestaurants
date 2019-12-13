@@ -11,6 +11,9 @@ namespace SecondRestaurants.Data
     {
         readonly IList<Restaurant> restaurantList;
         readonly ILogger logger;
+
+        public int Count => restaurantList.Count;
+
         public InMemoryRestaurantService(ILogger<InMemoryRestaurantService> logger)
         {
             this.logger = logger;
@@ -76,6 +79,11 @@ namespace SecondRestaurants.Data
             }
 
             return restaurant;
+        }
+
+        public int Commit()
+        {
+            return 0;
         }
     }
 }
