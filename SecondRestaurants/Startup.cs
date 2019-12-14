@@ -23,7 +23,8 @@ namespace SecondRestaurants
         {
             services.AddDbContextPool<RestaurantDBContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("DbConnection"));
+               // options.UseInMemoryDatabase("RestaurantInMemoryDB");
+                 options.UseSqlServer(Configuration.GetConnectionString("DbConnection"));
             });
              
           //  services.AddSingleton<IRestaurantDataService, InMemoryRestaurantService>();
